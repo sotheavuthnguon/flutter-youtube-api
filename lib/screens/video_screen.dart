@@ -5,8 +5,10 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoScreen extends StatefulWidget {
   final String id;
-
-  VideoScreen({required this.id});
+  const VideoScreen({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
 
   @override
   _VideoScreenState createState() => _VideoScreenState();
@@ -20,7 +22,7 @@ class _VideoScreenState extends State<VideoScreen> {
     super.initState();
     _controller = YoutubePlayerController(
       initialVideoId: widget.id,
-      flags: YoutubePlayerFlags(
+      flags: const YoutubePlayerFlags(
         mute: false,
         autoPlay: true,
       ),
@@ -35,11 +37,11 @@ class _VideoScreenState extends State<VideoScreen> {
         controller: _controller,
         showVideoProgressIndicator: true,
         onReady: () {
-          print('Player is ready.');
+          log('Player is ready.');
         },
         onEnded: (_) {
-          print('Player is ended');
-          _controller.seekTo(Duration(seconds: 0));
+          log('Player is ended');
+          _controller.seekTo(const Duration(seconds: 0));
           _controller.pause();
         },
       ),
