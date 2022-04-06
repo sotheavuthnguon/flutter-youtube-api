@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoScreen extends StatefulWidget {
@@ -27,6 +28,19 @@ class _VideoScreenState extends State<VideoScreen> {
         autoPlay: true,
       ),
     );
+  }
+
+  @override
+  void deactivate() {
+    log('deactivate is called');
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    log('dispose is called');
+    super.dispose();
   }
 
   @override
